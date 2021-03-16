@@ -18,17 +18,21 @@ class Board:
             print(colored(''.join(self.grid[i]), 'yellow'))
 
     def check_column(self, curr_column, key):
-        return self.grid[0][curr_column] == self.grid[1][curr_column] == self.grid[2][curr_column] == key
+        return self.grid[0][curr_column] == \
+               self.grid[1][curr_column] == \
+               self.grid[2][curr_column] == key
 
     def check_row(self, curr_row, key):
-        return self.grid[curr_row][0] == self.grid[curr_row][1] == self.grid[curr_row][2] == key
+        return self.grid[curr_row][0] ==\
+               self.grid[curr_row][1] ==\
+               self.grid[curr_row][2] == key
 
     def check_diagonals(self, key):
         return self.grid[0][0] == self.grid[1][1] == self.grid[2][2] == key \
                or self.grid[0][2] == self.grid[1][1] == self.grid[2][0] == key
 
     def is_full(self):
-        return not '.' in [v for l in self.grid for v in l]
+        return '.' not in [c for r in self.grid for c in r]
 
 
 class TicTacGame:
@@ -94,5 +98,3 @@ class TicTacGame:
 if __name__ == '__main__':
     game = TicTacGame()
     game.start_game()
-
-

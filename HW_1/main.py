@@ -3,9 +3,10 @@ from termcolor import colored
 
 class Board:
 
-    grid = [['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.']]
+    def __init__(self):
+        self.grid = [['.', '.', '.'],
+                     ['.', '.', '.'],
+                     ['.', '.', '.']]
 
     def is_empty(self, row, column):
         return self.grid[row][column] == '.'

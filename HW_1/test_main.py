@@ -123,4 +123,3 @@ def test_check_row(grid, key, row, expected, get_empty_board):
 def test_check_diagonals(grid, key, expected, get_empty_board):
     get_empty_board.grid = grid
     assert get_empty_board.check_diagonals(key) == expected
-

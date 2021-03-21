@@ -14,11 +14,3 @@ class CustomClass(metaclass=CustomMeta):
     @staticmethod
     def line():
         return 100
-
-
-inst = CustomClass()
-inst.custom_x
-inst.custom_line()
-
-# inst.x  # ошибка
-# inst.line() # ошибка

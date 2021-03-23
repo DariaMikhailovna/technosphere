@@ -8,6 +8,9 @@ class MetaTestCase(unittest.TestCase):
         self.my_list2 = CustomList([1, 2, 7])
         self.my_list3 = CustomList([1, 2, 4, 1])
         self.my_list4 = CustomList([3, 5])
+        self.my_list5 = CustomList([3, 5])
+        self.my_list6 = CustomList([5, 3])
+        self.my_list7 = CustomList([4, 4])
 
     def test_add(self):
         self.assertEqual(self.my_list1 + self.my_list2, [6, 3, 10, 7])
@@ -35,3 +38,45 @@ class MetaTestCase(unittest.TestCase):
         self.assertEqual(type((self.my_list1 - self.my_list2)), CustomList)
         self.assertEqual(type(self.my_list1 - [1, 2]), CustomList)
         self.assertEqual(type([] - self.my_list2), CustomList)
+
+    def test_eq(self):
+        self.assertTrue(self.my_list4 == self.my_list5)
+        self.assertTrue(self.my_list4 == self.my_list6)
+        self.assertTrue(self.my_list4 == self.my_list6)
+        self.assertFalse(self.my_list4 == self.my_list1)
+        self.assertFalse([] == self.my_list1)
+        self.assertFalse([1, 0] == self.my_list4)
+        self.assertTrue(self.my_list4 == [2, 6])
+
+    def test_lt(self):
+        self.assertTrue(self.my_list4 < self.my_list1)
+        self.assertFalse(self.my_list1 < self.my_list2)
+        self.assertTrue(self.my_list4 < [9])
+        self.assertFalse(self.my_list2 < [])
+
+    def test_ne_(self):
+        self.assertTrue(self.my_list4 != self.my_list1)
+        # self.assertFalse(self.my_list4 != self.my_list7)
+        # self.assertFalse(self.my_list4 != [8])
+        self.assertTrue([3, 4, 0] != self.my_list7)
+
+    def test_gt(self):
+        self.assertTrue(self.my_list1 > self.my_list4)
+        self.assertFalse(self.my_list4 > self.my_list7)
+        self.assertFalse(self.my_list4 > [8])
+        self.assertTrue([3, 4, 3] > self.my_list7)
+
+    def test_le(self):
+        self.assertFalse(self.my_list1 <= self.my_list4)
+        self.assertTrue(self.my_list4 <= self.my_list7)
+        self.assertTrue(self.my_list4 <= [8])
+        self.assertFalse(self.my_list4 <= [2, 1])
+        self.assertTrue([3, 4, 0] <= self.my_list7)
+
+    def test_ge(self):
+        self.assertTrue(self.my_list1 >= self.my_list4)
+        # self.assertTrue(self.my_list4 >= self.my_list7)
+        # self.assertTrue(self.my_list4 >= [8])
+        self.assertTrue(self.my_list4 >= [2, 1])
+        self.assertFalse([3, 4, 0] >= self.my_list7)
+

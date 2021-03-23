@@ -1,3 +1,7 @@
+from functools import total_ordering
+
+
+@total_ordering
 class CustomList(list):
 
     def __neg__(self):
@@ -19,6 +23,12 @@ class CustomList(list):
 
     def __rsub__(self, other):
         return -self + other
+
+    def __eq__(self, other):
+        return sum(self) == sum(other)
+
+    def __lt__(self, other):
+        return sum(self) < sum(other)
 
 
 if __name__ == '__main__':

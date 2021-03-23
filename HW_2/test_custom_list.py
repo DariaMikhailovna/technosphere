@@ -56,8 +56,8 @@ class MetaTestCase(unittest.TestCase):
 
     def test_ne_(self):
         self.assertTrue(self.my_list4 != self.my_list1)
-        # self.assertFalse(self.my_list4 != self.my_list7)
-        # self.assertFalse(self.my_list4 != [8])
+        self.assertFalse(self.my_list4 != self.my_list7)
+        self.assertFalse(self.my_list4 != [8])
         self.assertTrue([3, 4, 0] != self.my_list7)
 
     def test_gt(self):
@@ -75,8 +75,8 @@ class MetaTestCase(unittest.TestCase):
 
     def test_ge(self):
         self.assertTrue(self.my_list1 >= self.my_list4)
-        # self.assertTrue(self.my_list4 >= self.my_list7)
-        # self.assertTrue(self.my_list4 >= [8])
+        self.assertTrue(self.my_list4 >= self.my_list7)
+        self.assertTrue(self.my_list4 >= [8])
         self.assertTrue(self.my_list4 >= [2, 1])
         self.assertFalse([3, 4, 0] >= self.my_list7)
 

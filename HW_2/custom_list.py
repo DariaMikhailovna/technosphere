@@ -30,6 +30,12 @@ class CustomList(list):
     def __lt__(self, other):
         return sum(self) < sum(other)
 
+    def __ge__(self, other):
+        return sum(self) >= sum(other)
+
+    # def __ne__(self, other):
+    #     return sum(self) != sum(other)
+
 
 if __name__ == '__main__':
     my_list1 = CustomList([5, 1, 3, 6, 9])

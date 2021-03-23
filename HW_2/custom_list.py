@@ -33,8 +33,8 @@ class CustomList(list):
     def __ge__(self, other):
         return sum(self) >= sum(other)
 
-    # def __ne__(self, other):
-    #     return sum(self) != sum(other)
+    def __ne__(self, other):
+        return sum(self) != sum(other)
 
 
 if __name__ == '__main__':

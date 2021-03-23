@@ -79,4 +79,3 @@ class MetaTestCase(unittest.TestCase):
         self.assertTrue(self.my_list4 >= [8])
         self.assertTrue(self.my_list4 >= [2, 1])
         self.assertFalse([3, 4, 0] >= self.my_list7)
-

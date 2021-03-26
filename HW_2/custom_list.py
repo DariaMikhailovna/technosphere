@@ -35,14 +35,3 @@ class CustomList(list):
 
     def __ne__(self, other):
         return sum(self) != sum(other)
-
-
-if __name__ == '__main__':
-    my_list1 = CustomList([5, 1, 3, 6, 9])
-    my_list2 = CustomList([1, 2, 7, 1])
-    print(my_list1 - my_list2)
-    print(my_list1 - [1, 2, 3])
-    print([1, 2, 3, 1, 1, 1] - my_list1)
-    print(my_list1 + my_list2)
-    print([1, 0, 3] + my_list2)
-    print(my_list2 + [1, 0, 3])

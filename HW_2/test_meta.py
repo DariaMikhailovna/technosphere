@@ -19,3 +19,16 @@ class MetaTestCase(unittest.TestCase):
     def test_line(self):
         with self.assertRaises(AttributeError):
             self.inst.line()
+
+    def test_str(self):
+        self.assertEqual(str(self.inst), 'test_string')
+
+    def test_y(self):
+        with self.assertRaises(AttributeError):
+            self.inst.y
+
+    def test_custom_y(self):
+        self.assertEqual(self.inst.custom_y, 300)
+
+    def test_private_method(self):
+        self.assertEqual(self.inst.custom__CustomClass__private_method(), 0)

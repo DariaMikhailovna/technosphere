@@ -1,7 +1,10 @@
 class CustomMeta(type):
 
     def __new__(cls, name, bases, dct):
-        custom_attr = ((name, value) for name, value in dct.items() if not (name.startswith('__') and name.endswith('__')))
+        custom_attr = (
+            (name, value) for name, value in dct.items()
+            if not (name.startswith('__') and name.endswith('__'))
+        )
         all_attr = dict(('custom_' + name, value) for name, value in custom_attr)
         magic_attrs = dict((name, value) for name, value in dct.items() if (name.startswith('__') and name.endswith('__')))
         all_attr = all_attr | magic_attrs

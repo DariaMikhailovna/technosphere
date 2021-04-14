@@ -9,8 +9,5 @@ class Chat(models.Model):
     participants = models.ManyToManyField(User, verbose_name='получатели')
     created_date = models.DateTimeField(default=timezone.now, verbose_name='дата создания')
 
-    def create(self):
-        self.save()
-
     def __str__(self):
         return self.title

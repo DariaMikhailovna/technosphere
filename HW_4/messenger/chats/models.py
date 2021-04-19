@@ -11,3 +11,7 @@ class Chat(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Чат'
+        verbose_name_plural = 'Чаты'

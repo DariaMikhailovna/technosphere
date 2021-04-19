@@ -12,3 +12,7 @@ class Message(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'

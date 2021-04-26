@@ -1,4 +1,4 @@
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, Http404, HttpResponseNotAllowed
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
@@ -15,19 +15,27 @@ def create_chat(request):
         chat.save()
         return JsonResponse({'chat_id': chat.pk})
     else:
-        raise Http404
+        return HttpResponseNotAllowed('POST')
 
 
 def get_chat_by_id(request, chat_id):
     if request.method == "GET":
         chat = get_object_or_404(Chat, pk=chat_id)
-        return JsonResponse({'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date})
+        return JsonResponse({'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat_id})
     else:
-        raise Http404
+        return HttpResponseNotAllowed('GET')
 
 
+@csrf_exempt
 def get_all_chats(request):
-    chats = Chat.objects.all()
-    data = [{'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date} for chat in chats]
-    return JsonResponse({'chats': data})
+    if request.method == "GET":
+        chats = Chat.objects.all()
+        data = [{'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat.pk} for chat in chats]
+        return JsonResponse({'chats': data})
+    else:
+        return HttpResponseNotAllowed('GET')
 
+
+def delete_chat(request, chat_id):
+    Chat.objects.filter(pk=chat_id).delete()
+    return JsonResponse({'chat_id': 'deleted'})

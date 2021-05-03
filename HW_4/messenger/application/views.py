@@ -1,6 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import render
 
 
-def home_page(request):
-    print('Home page')
-    return JsonResponse({'status': 'ok'})
+@login_required
+def home(request):
+    print(request.user)
+    return render(request, 'home.html')
+
+
+def login(request):
+    return render(request, 'login.html')

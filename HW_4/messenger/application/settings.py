@@ -27,7 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-APPEND_SLASH = False
+APPEND_SLASH = True
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'

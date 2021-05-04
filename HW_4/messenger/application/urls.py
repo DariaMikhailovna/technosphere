@@ -18,12 +18,19 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.conf.urls import include
 from . import views
+from chats.view_set import ChatViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'chats', ChatViewSet, basename='chats')
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('chats/', include('chats.urls')),
+    # path('chats/', include('chats.urls')),
     path('login/', views.login, name='login'),
     path('logout', auth_views.LogoutView.as_view(), name='logout'),
     path('social_auth/', include('social_django.urls', namespace='social')),
 ]
+
+urlpatterns += router.urls

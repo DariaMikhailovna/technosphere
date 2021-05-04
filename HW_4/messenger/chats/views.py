@@ -42,6 +42,7 @@ def delete_chat(request, chat_id):
     return JsonResponse({'chat_id': 'deleted'})
 
 
+@csrf_exempt
 def chat_edit(request, chat_id):
     if request.method == "POST":
         chat = get_object_or_404(Chat, pk=chat_id)

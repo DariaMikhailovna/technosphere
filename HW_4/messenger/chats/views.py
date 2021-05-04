@@ -2,39 +2,34 @@ from django.http import JsonResponse, Http404, HttpResponseNotAllowed, HttpRespo
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
 
 from .models import Chat
 from .forms import ChatForm
 
 
 @csrf_exempt
+@require_http_methods(["POST"])
 def create_chat(request):
-    if request.method == "POST":
-        chat = Chat()
-        chat.author_id = request.POST['user']
-        chat.created_date = timezone.now()
-        chat.save()
-        return JsonResponse({'chat_id': chat.pk})
-    else:
-        return HttpResponseNotAllowed('POST')
+    chat = Chat()
+    chat.author_id = request.POST['user']
+    chat.created_date = timezone.now()
+    chat.save()
+    return JsonResponse({'chat_id': chat.pk})
 
 
+@require_http_methods(["GET"])
 def get_chat_by_id(request, chat_id):
-    if request.method == "GET":
-        chat = get_object_or_404(Chat, pk=chat_id)
-        return JsonResponse({'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat_id})
-    else:
-        return HttpResponseNotAllowed('GET')
+    chat = get_object_or_404(Chat, pk=chat_id)
+    return JsonResponse({'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat_id})
 
 
+@require_http_methods(["GET"])
 @csrf_exempt
 def get_all_chats(request):
-    if request.method == "GET":
-        chats = Chat.objects.all()
-        data = [{'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat.pk} for chat in chats]
-        return JsonResponse({'chats': data})
-    else:
-        return HttpResponseNotAllowed('GET')
+    chats = Chat.objects.all()
+    data = [{'author': chat.author.username, 'title': chat.title, 'created_date': chat.created_date, 'chat_id': chat.pk} for chat in chats]
+    return JsonResponse({'chats': data})
 
 
 def delete_chat(request, chat_id):
